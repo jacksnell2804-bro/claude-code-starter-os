@@ -31,7 +31,12 @@ command -v gbrain || echo "gbrain not installed"
 If gbrain IS installed, also run `gbrain engine status --json` and
 `gbrain sources list`. If a brain already exists, reuse it. Never
 re-initialise over an existing brain. If `gbrain` is already connected in
-`/mcp`, skip the terminal steps (they would hit the one-process lock).
+`/mcp` (for example from another project), do not run terminal `gbrain`
+commands here (they would hit the one-process lock). Instead, use the MCP
+`sources_list` tool to check that a source called `mybrain` exists and points
+at this repo's main folder. If it does, jump to Step 5 using the MCP
+`remember` and `recall` tools. If it does not, ask the user to close every
+Claude session, then run Step 4 in a plain terminal, then reopen Claude.
 
 ## Step 1, Install Bun (the runtime G-Brain needs)
 

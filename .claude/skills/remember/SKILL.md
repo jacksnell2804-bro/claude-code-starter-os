@@ -46,7 +46,11 @@ Confirm in one line: what was saved, under which entity.
 ## Correcting
 
 If a saved fact is wrong or out of date, save the corrected version (same
-entity) and use `forget` on the old one. Tell the user both happened.
+entity) and use `forget` on the old one. Then fix the backup file too:
+replace the old line in `context/memory-log.md` with the corrected one (for
+a decision, append a new `decisions/log.md` entry that says it supersedes the
+old date's decision). Otherwise the wrong fact comes back on the next
+rebuild. Tell the user all three happened.
 
 
 ---

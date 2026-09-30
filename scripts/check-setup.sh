@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Checks what is installed and prints the next step. Safe: reads only, changes nothing.
+# Checks what is installed and prints the next step. Safe: changes none of your files
+# (it only asks GitHub for its latest state, to check your backup).
 # Run from the repo folder:  bash scripts/check-setup.sh
 # Windows: run it in "Git Bash" (installed with Git for Windows), not PowerShell.
 
@@ -40,11 +41,17 @@ echo "Git"
 if git rev-parse --git-dir >/dev/null 2>&1; then
   ok "this folder is a git repo"
   if git remote get-url origin >/dev/null 2>&1; then
-    git fetch -q origin 2>/dev/null
-    ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo "?")
+    branch=$(git branch --show-current)
     dirty=$(git status --porcelain | wc -l | tr -d ' ')
-    if [ "$ahead" = "0" ] && [ "$dirty" = "0" ]; then ok "everything is committed and pushed to GitHub"
-    else miss "not fully backed up ($ahead unpushed commit(s), $dirty uncommitted change(s))" "say 'wrap up' in Claude, then 'push to GitHub'"; fi
+    if ! git fetch -q origin 2>/dev/null; then
+      miss "could not reach GitHub, so the backup cannot be confirmed" "check your internet and run: gh auth status"
+    elif ! git rev-parse -q --verify "origin/$branch" >/dev/null; then
+      miss "branch '$branch' has never been pushed to GitHub" "say 'push this branch to GitHub' in Claude"
+    else
+      ahead=$(git rev-list --count "origin/$branch..HEAD")
+      if [ "$ahead" = "0" ] && [ "$dirty" = "0" ]; then ok "everything is committed and pushed to GitHub"
+      else miss "not fully backed up ($ahead unpushed commit(s), $dirty uncommitted change(s))" "say 'wrap up' in Claude, then 'push to GitHub'"; fi
+    fi
   else miss "no GitHub backup yet" "ask Claude: 'connect this to my private GitHub repo and push it'"; fi
   if [ -z "$(git config user.email)" ]; then miss "git does not know who you are" "git config --global user.name \"Your Name\" && git config --global user.email \"you@example.com\""; fi
 else miss "not a git repo" "run: git init"; fi
