@@ -42,14 +42,19 @@ Cover, in this order:
 - For each unit, copy `uni/units/_TEMPLATE-UNIT/` to `uni/units/<CODE>/` and
   fill in its `index.md` header.
 - Fill in `hot-cache/current-state.md` with the nearest deadlines.
-- Add a `reminders/` file for any assessment due in the next 30 days.
+- Add a `reminders/` file for EVERY assessment with a known due date, not
+  just the near ones (the session-start check decides what to mention).
 
 ## Step 4, Show and commit
 
 - Show a short table: file, what was filled in.
-- Explain git in one sentence ("a commit is a save point you can go back to"),
-  then commit with `git add context/ hot-cache/ uni/ reminders/` and
-  `git commit -m "Set up my context"`.
+- Explain git in one sentence ("a commit is a save point you can go back to").
+- If `git config user.name` or `git config user.email` is empty, ask for
+  their name and the email on their GitHub account and set them with
+  `git config --global user.name "..."` and `git config --global user.email "..."`.
+- Stage ONLY the files this skill created or edited, by name (never a whole
+  folder: `uni/` may already hold files they dropped in). Show
+  `git diff --cached --stat`, then `git commit -m "Set up my context"`.
 
 ## Step 5, Next steps
 

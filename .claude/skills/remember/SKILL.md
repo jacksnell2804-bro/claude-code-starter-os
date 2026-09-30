@@ -24,8 +24,14 @@ Use the `remember` MCP tool. One claim per call.
   `belief`, or `event`.
 - `provenance`: where it came from, e.g. "user said in chat, 2027-03-04".
 
-For a decision, also append to `decisions/log.md`:
-`[YYYY-MM-DD] DECISION: ... | WHY: ... | CONTEXT: ...`
+**Also write it to a file, every time**, so it is backed up by git and
+survives a lost laptop (the G-Brain database itself is only on this
+computer):
+- a decision: append to `decisions/log.md` as
+  `[YYYY-MM-DD] DECISION: ... | WHY: ... | CONTEXT: ...`
+- anything else: append to `context/memory-log.md` as
+  `- [YYYY-MM-DD] (<entity>, <kind>) <fact>` (create the file if needed)
+Then the facts can always be rebuilt from the repo.
 
 Confirm in one line: what was saved, under which entity.
 

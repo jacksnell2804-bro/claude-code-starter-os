@@ -24,7 +24,8 @@ notes. Read all of them fully before marking.
 5. Flag AI-sounding writing: em dashes, "delve", "landscape", "it is
    important to note", stacked "Furthermore / Moreover / Additionally",
    uniform sentence lengths, conclusions that only restate.
-6. Word count against the limit.
+6. Word count against the brief's exact limit and exclusions. No tolerance
+   unless the brief states one.
 
 ## What to hand back
 ```

@@ -11,8 +11,12 @@ agent with no memory of writing it.
 
 ## Step 1, Collect what changed
 
-`git diff main...HEAD` (or `git diff` for uncommitted work). If there is a
-spec in `specs/`, include it.
+Collect ALL of it, or new files get no review:
+- `git status --short` (the full list, including untracked `??` files)
+- `git diff main...HEAD` (committed on this branch)
+- `git diff --cached` and `git diff` (staged and unstaged)
+- the full contents of every untracked file in the list
+If there is a spec in `specs/`, include it.
 
 ## Step 2, Run the reviewer
 

@@ -78,8 +78,17 @@ git clone https://github.com/<your-username>/my-ai-os.git
 cd my-ai-os
 ```
 
-(If git asks you to log in, the easiest route is installing the GitHub CLI,
-`gh`, and running `gh auth login`. Or ask Claude to help once it is running.)
+Because the repo is private, git needs you logged in to GitHub. The easiest
+way is the GitHub CLI: install it from [cli.github.com](https://cli.github.com)
+(Mac: `brew install gh`), then run `gh auth login` and pick GitHub.com,
+HTTPS, and "login with a web browser". After that, `git clone` just works.
+
+Tell git who you are (once per computer; use your GitHub email):
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
 
 ### 5. Start Claude in the folder
 
@@ -104,6 +113,9 @@ step (about 10 minutes). Read `docs/gbrain.md` for what it is.
 ```bash
 bash scripts/check-setup.sh
 ```
+
+Windows: run this in **Git Bash** (search "Git Bash" in the Start menu; it
+came with Git for Windows), from inside your `my-ai-os` folder.
 
 Everything should say `[ok]`. If not, paste the output to Claude.
 

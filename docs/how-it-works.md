@@ -110,7 +110,7 @@ The same mistake twice means it should be a rule.
 |---|---|---|
 | The conversation | this session only | gone after `/clear` or closing |
 | Files in this repo | context, notes, decisions, handoffs | forever (and in git history) |
-| G-Brain | a searchable index of all of the above, plus facts Claude saves | forever, searchable from any project |
+| G-Brain | a searchable index of all of the above, plus facts Claude saves | as long as this computer keeps it. Every saved fact is also written to `context/memory-log.md` or `decisions/log.md`, so pushing to GitHub backs it up |
 
 Files are the source of truth. G-Brain makes them searchable and adds quick
 facts. See `gbrain.md`.

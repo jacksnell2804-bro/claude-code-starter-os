@@ -71,8 +71,12 @@ everything it needs in the file or in the brief it is given (see
 its own program.
 
 Two ways:
-- **Scheduled tasks in Claude Code** (`/schedule`): run a prompt or skill on
-  a timer, e.g. "every Sunday at 6pm, run my weekly plan". Easiest.
+- **Scheduled tasks** (`/schedule`): run a prompt on a timer, e.g. "every
+  Sunday at 6pm, plan my week". These run **in the cloud** on a fresh copy of
+  your GitHub repo, so they only see what you have pushed, and they cannot
+  reach your local G-Brain. Great for things that only need your repo files.
+  For something that needs your local setup, `/loop` repeats a task while
+  your Claude session stays open.
 - **Claude Agent SDK**: write a small Python or TypeScript program that uses
   the same engine as Claude Code, with your own tools. This is how you build
   a real product or a bot. It bills per use to an API key (from
@@ -97,6 +101,6 @@ That is `.claude/rules/goals-not-steps.md`, and the fill-in form is
 | Deadline checker (what is due, most urgent first) | subagent | haiku |
 | Lecture-to-flashcards | skill (already have `study-quiz`) | sonnet |
 | Reading summariser (PDF in, one-page summary out) | subagent | sonnet |
-| Weekly planner (Sunday night, plans your week) | skill + `/schedule` | sonnet |
+| Weekly planner (Sunday night, plans your week) | skill + `/schedule` (needs a pushed repo) | sonnet |
 | Job/internship tracker | project in `projects/` | sonnet |
 | Essay argument stress-tester | already have `grill-me` + `marker` | opus |

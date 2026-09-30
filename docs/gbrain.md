@@ -48,7 +48,7 @@ bun install -g github:garrytan/gbrain#latest-stable
 gbrain init --pglite --no-embedding
 
 # 4. Load this repo (run inside the repo, after committing)
-gbrain sources add mybrain --path "$(pwd)"
+gbrain sources add mybrain --path "$(git rev-parse --show-toplevel)"   # the main folder, on main
 gbrain sync --source mybrain --no-embed --no-pull
 gbrain search "goals"
 
@@ -83,6 +83,20 @@ Things you can say:
 - "what did I decide about ...?"
 - "search my brain for ..."
 - "what do I know about ...?"
+
+## Backups
+
+The G-Brain database lives only on your computer. That is fine, because it
+is rebuildable: your files are in git (push to GitHub), and the `remember`
+skill writes every saved fact to `context/memory-log.md` or
+`decisions/log.md` too. On a new laptop: clone the repo, run the setup
+again, and the brain reloads from your files.
+
+## Worktrees and branches (Orca)
+
+G-Brain reads the **main** folder's committed files on `main`. Work done on
+another branch or in an Orca worktree reaches G-Brain once it is merged into
+`main` and synced.
 
 ## Handy commands (with Claude closed)
 

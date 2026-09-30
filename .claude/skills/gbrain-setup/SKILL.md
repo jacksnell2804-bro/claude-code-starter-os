@@ -22,12 +22,16 @@ step fails; do not improvise around an error.
 ## Step 0, Check what is already there
 
 ```bash
-claude mcp list          # is gbrain already connected?
-gbrain --version         # is it installed?
-gbrain engine status --json
+claude mcp list                                # is gbrain already connected?
+command -v bun || echo "bun not installed"     # expected on a fresh machine
+command -v gbrain || echo "gbrain not installed"
 ```
 
-If a brain already exists, reuse it. Never re-initialise over an existing brain.
+"Not installed" is the normal starting point, not a failure: go to Step 1.
+If gbrain IS installed, also run `gbrain engine status --json` and
+`gbrain sources list`. If a brain already exists, reuse it. Never
+re-initialise over an existing brain. If `gbrain` is already connected in
+`/mcp`, skip the terminal steps (they would hit the one-process lock).
 
 ## Step 1, Install Bun (the runtime G-Brain needs)
 
@@ -67,19 +71,28 @@ gbrain init --pglite --no-embedding
 
 ## Step 4, Load this repo into the brain
 
-The repo must be committed first (sync reads git):
+The repo must be committed first (sync reads git). Run `git status`. If
+anything is uncommitted, show it, commit only files the user agrees to (by
+name), and stop if the commit fails for any reason other than "nothing to
+commit".
+
+Register the **main checkout** of the repo (the folder they cloned, on the
+`main` branch), never an Orca worktree or another branch. Check with
+`git branch --show-current` (must say `main`) and
+`git rev-parse --show-toplevel` (use that path).
 
 ```bash
-git add -A -- context second-brain uni decisions docs && git commit -m "Snapshot before G-Brain import" || true
-gbrain sources add mybrain --path "$(pwd)"
+gbrain sources add mybrain --path "$(git rev-parse --show-toplevel)"
 gbrain sync --source mybrain --no-embed --no-pull
 gbrain search "goals"
 ```
 
 `--no-pull` is required: it tells G-Brain to read the local files as they are
 instead of pulling from GitHub first. Dot-folders like `.claude/` are skipped
-on purpose. The search should return `context/goals`. If `sources add` refuses,
-fall back to `gbrain import "$(pwd)" --no-embed`.
+on purpose. The search should return `context/goals`. Then confirm the mapping with
+`gbrain sources list`: `mybrain` must point at this folder. The `handoff`
+and `wiki` skills sync `mybrain`, so if `sources add` refuses, stop and fix
+that (read the error; `gbrain sources --help`) rather than working around it.
 
 ## Step 5, Save and read back a test memory
 

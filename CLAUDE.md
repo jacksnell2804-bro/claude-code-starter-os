@@ -31,8 +31,9 @@ interviews me and fills in my context files.
 
 ## Session start
 
-Check `reminders/` for files with `status: open` due in the next 30 days and
-mention them in one line before anything else.
+Check `reminders/` for files with `status: open` that are OVERDUE or due in
+the next 30 days, and mention them in one line before anything else
+(overdue first).
 
 ---
 

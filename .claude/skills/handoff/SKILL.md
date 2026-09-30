@@ -46,8 +46,10 @@ If connected:
 1. `remember` one fact: a 2 to 3 sentence summary of the session, entity
    `sessions`, kind `event`, provenance "session close, <date>".
 2. `sync_brain` with `source_id: "mybrain"`, `no_pull: true` and
-   `no_embed: true` (commit first: sync reads what git has committed), so today's
-   notes are searchable next time.
+   `no_embed: true`, so today's notes are searchable next time. The brain
+   reads the MAIN checkout's committed files. If this session worked on
+   another branch or an Orca worktree, say so: its notes reach G-Brain only
+   once merged into `main` in the main folder.
 If not connected, skip and say so in one line.
 
 ## Step 6, Tell the user

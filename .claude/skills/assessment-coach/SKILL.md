@@ -5,9 +5,20 @@ description: Coaches the user through a university assessment (essay, report, re
 
 # Assessment coach
 
-Governed by `.claude/rules/academic-integrity.md`. Read `context/study.md`
-for the university's AI-use policy BEFORE helping. If the policy is unknown,
-ask the user to check it, and until then coach only (steps 1, 2, 3, 5).
+Governed by `.claude/rules/academic-integrity.md`.
+
+## Step 0, Check the AI-use policy (always first)
+
+Read `context/study.md` for the university's AI-use policy and any rule for
+this unit or this assessment. Some units ban AI help on an assessment
+entirely; some allow research and feedback but not drafting.
+
+- **Policy unknown:** stop. Tell them where it usually lives (the unit
+  outline, the assessment brief, the university's academic integrity page)
+  and ask them to paste the relevant line. Do nothing else on this
+  assessment until it is recorded in `context/study.md`.
+- **Policy known:** write down, at the top of `brief.md`, which of the steps
+  below it permits, and only do those.
 
 Workspace: `uni/assessments/<CODE>-<name>/` (copy `_TEMPLATE` if missing).
 
@@ -59,13 +70,14 @@ Hand the draft to the `marker` agent, or mark it yourself against the rubric:
 - AI-tell check: em dashes, "delve", "navigate the landscape", "it is
   important to note", stacked "Furthermore/Moreover", uniform sentence length,
   empty "In conclusion" restatements. Point them out; they fix them.
-- Word count within 10%.
+- Word count against the brief's actual limit, and what it excludes
+  (references, headings). Assume there is NO tolerance unless the brief says so.
 
 ## Step 6, Final check
 
 A checklist: answers the task verb, uses the frameworks correctly, every
-claim evidenced, critical not descriptive, referencing clean, within word
-count, and one reminder that they own the submission and must read every line.
+claim evidenced, critical not descriptive, referencing clean, within the
+brief's word limit, and one reminder that they own the submission and must read every line.
 
 
 ---
