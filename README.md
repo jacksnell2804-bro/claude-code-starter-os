@@ -24,22 +24,12 @@ What you get:
 
 ## Setup (about 30 minutes, once)
 
-### 1. Make your own PRIVATE copy
+### 1. Get a GitHub account and a Claude plan
 
-Your copy will hold personal things (your units, notes, assignments), so it
-should be private.
-
-1. Make a free account at [github.com](https://github.com) if you do not
-   have one.
-2. On this repo's GitHub page, click **Use this template**, then
-   **Create a new repository**. Name it (e.g. `my-ai-os`) and choose
-   **Private**.
-3. You will clone (download) it in step 4.
+- A free account at [github.com](https://github.com).
+- A paid Claude plan (Pro or Max). The free plan does not include Claude Code.
 
 ### 2. Install Claude Code
-
-You need a paid Claude plan (Pro or Max). The free plan does not include
-Claude Code.
 
 Open a terminal (Mac: press Cmd+Space, type "Terminal". Windows: open
 "PowerShell") and paste:
@@ -67,36 +57,48 @@ Mac: `brew install --cask stablyai/orca/orca`, or download it from
 You can skip Orca and just use `claude` in a terminal; everything works the
 same.
 
-### 4. Download your copy
+### 4. Paste the first prompt (makes your private copy)
 
-In a terminal:
+Your copy will hold personal things (units, notes, assignments), so it must
+be **private**. Claude can make it for you.
+
+In a terminal, go to your home folder and start Claude (or start an agent in
+Orca in your home folder):
 
 ```bash
-# pick where it lives, e.g. your home folder
 cd ~
-git clone https://github.com/<your-username>/my-ai-os.git
-cd my-ai-os
+claude
 ```
 
-Because the repo is private, git needs you logged in to GitHub. The easiest
-way is the GitHub CLI: install it from [cli.github.com](https://cli.github.com)
-(Mac: `brew install gh`), then run `gh auth login` and pick GitHub.com,
-HTTPS, and "login with a web browser". After that, `git clone` just works.
+Then paste the prompt from **[docs/first-prompt.md](docs/first-prompt.md)**.
+It installs nothing without asking, gets you logged in to GitHub, creates a
+private repo called `my-ai-os` from this template, downloads it, sets up git,
+and proves each step worked.
 
-Tell git who you are (once per computer; use your GitHub email):
+<details><summary>Prefer to do it by hand?</summary>
+
+1. On this repo's GitHub page click **Use this template**, then **Create a
+   new repository**, name it `my-ai-os`, choose **Private**.
+2. Install the GitHub CLI ([cli.github.com](https://cli.github.com)) and run
+   `gh auth login` (GitHub.com, HTTPS, web browser).
+3. `cd ~ && git clone https://github.com/<your-username>/my-ai-os.git`
+4. `git config --global user.name "Your Name"` and
+   `git config --global user.email "you@example.com"` (your GitHub email).
+
+</details>
+
+### 5. Restart Claude inside your copy
+
+Type `/exit`, then:
 
 ```bash
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
+cd ~/my-ai-os
+claude
 ```
 
-### 5. Start Claude in the folder
-
-- **Orca:** add the `my-ai-os` folder as a project and start a Claude Code agent.
-- **Terminal:** `cd ~/my-ai-os` then `claude`.
-
-When it asks whether you trust this folder, say yes (that lets the settings
-in `.claude/settings.json` apply).
+(Orca: add the `my-ai-os` folder as a project and start a Claude Code agent
+in it.) Your skills only load when Claude starts inside this folder. When it
+asks whether you trust the folder, say yes.
 
 ### 6. Say: `set me up`
 
